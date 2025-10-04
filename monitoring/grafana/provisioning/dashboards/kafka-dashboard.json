@@ -1,0 +1,59 @@
+{
+  "id": null,
+  "title": "Kafka Monitoring Dashboard",
+  "tags": [
+    "kafka",
+    "monitoring"
+  ],
+  "timezone": "browser",
+  "schemaVersion": 27,
+  "version": 1,
+  "panels": [
+    {
+      "type": "graph",
+      "title": "Messages In Per Second",
+      "targets": [
+        {
+          "expr": "rate(kafka_server_brokertopicmetrics_messages_in_total[1m])",
+          "legendFormat": "{{topic}}"
+        }
+      ],
+      "datasource": "Prometheus"
+    },
+    {
+      "type": "graph",
+      "title": "Bytes In / Out Per Second",
+      "targets": [
+        {
+          "expr": "rate(kafka_server_brokertopicmetrics_bytes_in_total[1m])",
+          "legendFormat": "Bytes In ({{topic}})"
+        },
+        {
+          "expr": "rate(kafka_server_brokertopicmetrics_bytes_out_total[1m])",
+          "legendFormat": "Bytes Out ({{topic}})"
+        }
+      ],
+      "datasource": "Prometheus"
+    },
+    {
+      "type": "graph",
+      "title": "Active Controller Count",
+      "targets": [
+        {
+          "expr": "kafka_controller_kafkacontroller_activecontrollercount"
+        }
+      ],
+      "datasource": "Prometheus"
+    },
+    {
+      "type": "graph",
+      "title": "Under Replicated Partitions",
+      "targets": [
+        {
+          "expr": "kafka_server_replicamanager_underreplicatedpartitions"
+        }
+      ],
+      "datasource": "Prometheus"
+    }
+  ]
+}
